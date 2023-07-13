@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response, request } from "express";
 import { QueryConfig, QueryResult } from "pg";
 import { IMovies } from "./interfaces";
 import { client } from "./database";
@@ -29,4 +29,30 @@ const validNameMovies = async (request: Request, response: Response, next: NextF
     return next()
 }
 
-export {validNameMovies}
+const validIdMovies = async (request: Request, response: Response, next: NextFunction): Promise<Response | void> =>{
+    const id = parseInt(request.params.id)
+
+    const queryString: string = `
+        SELECT 
+            *
+        FROM
+            movies
+        WHERE
+            id = $1;
+    `
+
+    const queryConfig: QueryConfig = {
+        text: queryString,
+        values: [id]
+    }
+
+    const queryResult: QueryResult<IMovies> = await client.query(queryConfig)
+
+    if(queryResult.rowCount === 0){
+        return response.status(404).json({"message": `Movie not found.`})
+    }
+
+    return next()
+}
+
+export {validNameMovies, validIdMovies}
