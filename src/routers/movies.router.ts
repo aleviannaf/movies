@@ -1,12 +1,12 @@
 import { Router } from "express"
-import { createMovies, deleteMovies, listMovies, updateMovies } from "../functions"
 import { validIdMovies, validNameMovies } from "../middlewares"
+import moviesControllers from "../controllers/movies.controllers"
 
 const moviesRouter: Router = Router()
 
-moviesRouter.get("", listMovies)
-moviesRouter.post("", validNameMovies, createMovies)
-moviesRouter.patch("/:id", validIdMovies, validNameMovies, updateMovies)
-moviesRouter.delete("/:id", validIdMovies, deleteMovies)
+moviesRouter.get("", moviesControllers.listMovies)
+moviesRouter.post("", validNameMovies, moviesControllers.createMovies)
+moviesRouter.patch("/:id", validIdMovies, validNameMovies, moviesControllers.updateMovies)
+moviesRouter.delete("/:id", validIdMovies,moviesControllers.deleteMovies)
 
 export default moviesRouter

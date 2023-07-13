@@ -8,4 +8,16 @@ interface IMovies {
 
 type IMoviesRequest = Omit<IMovies, "id">
 
-export { IMovies, IMoviesRequest}
+type IMoviesUpdate = Partial<IMoviesRequest>;
+
+interface Pagination {
+    prevPage: string | null,
+    nextPage: string | null,
+    currentPage: number,
+    totalItens: number,
+    data: Array<IMovies>
+}
+
+
+
+export { IMovies, IMoviesRequest, Pagination, IMoviesUpdate}
