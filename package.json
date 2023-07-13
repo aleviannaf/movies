@@ -4,7 +4,7 @@
   "description": "| Método | Endpoint | Responsabilidade |\r |--------|----------|------------------|\r | POST | /movies | Criar um novo filme |\r | GET | /movies | Listar todos os filmes |\r | PATCH | /movies/&lt;id&gt; | Atualiza os dados de um filme de forma dinâmica |\r | DELETE | /movies/&lt;id&gt; | Deleta um filme |",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/app.ts",
+    "dev": "ts-node-dev src/server.ts",
     "build": "rimraf ./build && tsc",
     "start": "node build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
