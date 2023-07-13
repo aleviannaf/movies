@@ -98,4 +98,24 @@ const updateMovies = async (request: Request, response: Response): Promise<Respo
     return response.status(200).json(queryResult.rows[0])
 }
 
-export {createMovies, listMovies, updateMovies}
+const deleteMovies = async (request: Request, response: Response): Promise<Response> =>{
+    const id = parseInt(request.params.id)
+
+    const queryString: string = `
+        DELETE FROM 
+            movies
+        WHERE
+            id = $1;
+    `
+
+    const queryConfig: QueryConfig = {
+        text: queryString,
+        values: [id]
+    }
+
+    await client.query(queryConfig)
+
+    return response.status(204).send()
+}
+
+export {createMovies, listMovies, updateMovies, deleteMovies}
