@@ -1,3 +1,3 @@
-import moviesServices from "./movies.controllers"
+import moviesServices from "./movies.services"
 
 export { moviesServices}
